@@ -1,3 +1,4 @@
+#! /usr/bin/node
 var program = require('commander');
 var fs = require('fs'),
 Buffer = require('buffer').Buffer;
@@ -149,22 +150,26 @@ program
 
   //--convert <format>
   if(program.convert) {
-    if(!program.input || !program.output) {
+    if(!program.input) {
       return console.log('you have to give input and output file');
     }
     var content = readFile(program.input);
+    var output = program.input;
+    if(program.output) {
+      output = program.output;
+    }
     switch(checkType(content)) {
       case 'TMP':
-          writeFile(program.output, tmpTo(program.convert, content,parseFloat(program.fps)));
+          writeFile(output, tmpTo(program.convert, content,parseFloat(program.fps)));
         break;
       case 'MPL2':
-          writeFile(program.output, mpl2To(program.convert, content,parseFloat(program.fps)));
+          writeFile(output, mpl2To(program.convert, content,parseFloat(program.fps)));
         break;
       case 'MicroDVD':
-          writeFile(program.output, microDvdTo(program.convert, content,parseFloat(program.fps)));
+          writeFile(output, microDvdTo(program.convert, content,parseFloat(program.fps)));
         break;
       case 'SubRip':
-          writeFile(program.output, subRipTo(program.convert, content,parseFloat(program.fps)));
+          writeFile(output, subRipTo(program.convert, content,parseFloat(program.fps)));
         break;
     }
   }

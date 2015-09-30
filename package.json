@@ -22,4 +22,8 @@
   ],
   "author": "Wojciech Wozniak",
   "license": "MIT"
+  ,"preferGlobal": "true",
+  "bin": {
+    "subconv" : "index.js"
+  }
 }
