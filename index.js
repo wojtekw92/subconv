@@ -21,7 +21,6 @@ var tmpTo = function(format, content, fps){
   switch(format) {
     case 'TMP':
       return content;
-      break;
     case 'MPL2':
       var subsArray=[];
       content.replace(/(\d+):(\d+):(\d+):(.*)/gi,
@@ -29,7 +28,6 @@ var tmpTo = function(format, content, fps){
         var beginTime =(parseInt(p1)*3600+parseInt(p2)*60+parseInt(p3))*10;
         subsArray.push({startTime:beginTime,sub:p4});
       });
-
       break;
     case 'MicroDVD':
       break;
@@ -51,17 +49,14 @@ var mpl2To = function(format, content, fps) {
         return hours+':'+minutes+':'+seconds+':'+p3;
       });
       return content;
-      break;
     case 'MPL2':
       return content;
-      break;
     case 'MicroDVD':
       content = content.replace(/\{(\d+)\}\{(\d+)\}(.*)/gi,
                         function(match,p1,p2,p3,offset,string) {
         return '['+~~(parseInt(p1)*10/fps)+']'+'['+~~(parseInt(p2)*10/fps)+']'+p3;
       });
       return content;
-      break;
     case 'SubRip':
       break;
   }
@@ -77,10 +72,8 @@ var microDvdTo = function(format, content, fps) {
         return '{'+~~(parseInt(p1)*fps/10)+'}'+'{'+~~(parseInt(p2)*fps/10)+'}'+p3;
       });
       return content;
-      break;
     case 'MicroDVD':
       return content;
-      break;
     case 'SubRip':
       break;
   }
