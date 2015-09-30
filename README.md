@@ -5,10 +5,10 @@ ABOUT
 -----
 Subconv is a small command line tool for converting subtitles.
 It can convert subtitles between formats:
-+TMP
-+MPL2
-+SubRip
-+MicroDvd
+* TMP
+* MPL2
+* SubRip
+* MicroDvd
 
 HOW TO INSTALL
 --------------
