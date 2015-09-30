@@ -1,8 +1,11 @@
 {
   "name": "subconv",
   "version": "0.0.1",
-  "description": "Tool for converting subtitles. Supported foramts TMP, MPL2, MicroDVD, SubRip.",
+  "description": "Tool for converting subtitles. Supported formats TMP, MPL2, MicroDVD, SubRip.",
   "main": "index.js",
+  "contributors" : [
+    "Michał Budzyński <michal@virtualdesign.pl>"
+  ],
   "dependencies": {
     "fs": "^0.0.2",
     "readline": "^0.0.5",
