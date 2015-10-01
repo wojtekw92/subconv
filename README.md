@@ -13,15 +13,22 @@ It can convert subtitles between formats:
 ## HOW TO INSTALL
 ```
 git clone git@github.com:wojtekw92/subconv.git
+cd subconv
+npm install -g
 ```
 
-or
+or simply
 
 ```
 npm i subconv -g
 ```
 
 ## USAGE
+```
+subconv -i INPUTFILE.txt -c "OUTPUT FORMAT"
+```
+
+## OPTIONS 
 ```
 Options:
 
@@ -30,7 +37,7 @@ Options:
 -c, --convert <format>     convert input subtitles to output with selected format
 -i, --input <file>         input file
 -o, --output <file>        output file
--C, --check <file>         Chceck subtitle format in file
+-C, --check <file>         Check subtitle format in file
 -o, --output <outputFile>  File with converted subtitles
 -f, --fps [fps]            Set FPS for some subtitles format[23.98]
 ```

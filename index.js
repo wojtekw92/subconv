@@ -144,8 +144,8 @@ program
   .option('-c, --convert <format>', 'Convert input subtitles to output with' +
                                     ' selected format')
   .option('-i, --input <file>', 'Input file')
-  .option('-o, --output <file>', 'Output file')
-  .option('-C, --check <file>', 'Chceck subtitle format in file')
+  .option('-o, --output <file>', 'Output file. Override input if not provided')
+  .option('-C, --check <file>', 'Check subtitle format in file')
   .option('-o, --output <outputFile>', 'File with converted subtitles')
   .option('-f, --fps [fps]', 'Set FPS for subtitle format[23.98]', 23.98)
   .parse(process.argv);
