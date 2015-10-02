@@ -12,7 +12,7 @@ var checkType = function(data) {
     return 'MPL2';
   } else if (data.match(/^\[\d+\]\[\d+\].*/i)) {
     return 'MicroDVD';
-  } else if (data.match(/^\d*\W*\n\d\d:\d\d:\d\d,\d*\s*-->\s*\d\d:\d\d:\d\d,\d*\W*\n/i)) {
+  } else if (data.match(/\d*\W*[\n\r]*\d\d:\d\d:\d\d,\d*\s*-->\s*\d\d:\d\d:\d\d,\d*\W*[\n\r]*/gi)) {
     return 'SubRip';
   } else {
     return 'unknow format';
@@ -46,9 +46,9 @@ var tmpTo = function(format, content, fps) {
 var mpl2To = function(format, content, fps) {
   switch (format) {
     case 'TMP':
-      content = content.replace(/\[(\d+)\]\[(\d+)\](.*)/gi,
+      content = content.replace(/\{(\d+)\}\{(\d+)\}(.*)/gi,
         function(match, p1, p2, p3, offset, string) {
-          var time = ~~(parseInt(p1, 10) / 10);
+          var time = ~~(parseInt(p1, 10) / fps);
           var hours = ~~(time / 3600);
           time = time % 3600;
           var minutes = ~~(time / 60);
@@ -73,7 +73,16 @@ var mpl2To = function(format, content, fps) {
 var microDvdTo = function(format, content, fps) {
   switch (format) {
     case 'TMP':
-      break;
+      content = content.replace(/\[(\d+)\]\[(\d+)\](.*)/gi,
+      function(match, p1, p2, p3, offset, string) {
+        var time = ~~(parseInt(p1, 10) / 10);
+        var hours = ~~(time / 3600);
+        time = time % 3600;
+        var minutes = ~~(time / 60);
+        var seconds = time % 60;
+        return hours + ':' + minutes + ':' + seconds + ':' + p3;
+      });
+      return content;
     case 'MPL2':
       content = content.replace(/\[(\d+)\]\[(\d+)\](.*)/gi,
         function(match, p1, p2, p3, offset, string) {
