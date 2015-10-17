@@ -9,9 +9,9 @@ var checkType = function(data) {
   if (data.match(/^\d+:\d+:\d+:.*/i)) {
     return 'TMP';
   } else if (data.match(/^\{\d+\}\{\d+\}.*/i)) {
-    return 'MPL2';
-  } else if (data.match(/^\[\d+\]\[\d+\].*/i)) {
     return 'MicroDVD';
+  } else if (data.match(/^\[\d+\]\[\d+\].*/i)) {
+    return 'MPL2';
   } else if (data.match(/\d*\W*[\n\r]*\d\d:\d\d:\d\d,\d*\s*-->\s*\d\d:\d\d:\d\d,\d*\W*[\n\r]*/gi)) {
     return 'SubRip';
   } else {
@@ -43,7 +43,7 @@ var tmpTo = function(format, content, fps) {
   }
 };
 
-var mpl2To = function(format, content, fps) {
+var microDvdTo = function(format, content, fps) {
   switch (format) {
     case 'TMP':
       content = content.replace(/\{(\d+)\}\{(\d+)\}(.*)/gi,
@@ -56,9 +56,9 @@ var mpl2To = function(format, content, fps) {
           return hours + ':' + minutes + ':' + seconds + ':' + p3;
         });
       return content;
-    case 'MPL2':
-      return content;
     case 'MicroDVD':
+      return content;
+    case 'MPL2':
       content = content.replace(/\{(\d+)\}\{(\d+)\}(.*)/gi,
         function(match, p1, p2, p3, offset, string) {
           return '[' + ~~(parseInt(p1, 10) * 10 / fps) + ']' +
@@ -70,7 +70,7 @@ var mpl2To = function(format, content, fps) {
   }
 };
 
-var microDvdTo = function(format, content, fps) {
+var mpl2To = function(format, content, fps) {
   switch (format) {
     case 'TMP':
       content = content.replace(/\[(\d+)\]\[(\d+)\](.*)/gi,
@@ -83,14 +83,14 @@ var microDvdTo = function(format, content, fps) {
         return hours + ':' + minutes + ':' + seconds + ':' + p3;
       });
       return content;
-    case 'MPL2':
+    case 'MicroDVD':
       content = content.replace(/\[(\d+)\]\[(\d+)\](.*)/gi,
         function(match, p1, p2, p3, offset, string) {
           return '{' + ~~(parseInt(p1, 10) * fps / 10) + '}' +
                  '{' + ~~(parseInt(p2, 10) * fps / 10) + '}' + p3;
         });
       return content;
-    case 'MicroDVD':
+    case 'MPL2':
       return content;
     case 'SubRip':
       break;
@@ -101,7 +101,7 @@ var subRipTo = function(format, content, fps) {
   switch (format) {
     case 'TMP':
       break;
-    case 'MPL2':
+    case 'MicroDVD':
       content = content.replace(/\d*\W*\n(\d\d):(\d\d):(\d\d),(\d*)\s*-->\s*(\d\d):(\d\d):(\d\d),(\d*)\W*\n/gi,
         function(match, p1, p2, p3, p4, p5, p6, p7, p8, offset, string) {
           p1 = parseInt(p1, 10) * 3600;
@@ -120,7 +120,25 @@ var subRipTo = function(format, content, fps) {
       content = content.replace(/\r\n/gi, '|');
       content = content.replace(/\|\|/gi, '\r\n');
       return content;
-    case 'MicroDVD':
+    case 'MPL2':
+      content = content.replace(/\d*\W*\n(\d\d):(\d\d):(\d\d),(\d*)\s*-->\s*(\d\d):(\d\d):(\d\d),(\d*)\W*\n/gi,
+      function(match, p1, p2, p3, p4, p5, p6, p7, p8, offset, string) {
+        p1 = parseInt(p1, 10) * 3600;
+        p2 = parseInt(p2, 10) * 60;
+        p3 = parseInt(p3, 10);
+        p4 = parseInt(p4, 10) / 100;
+
+        p5 = parseInt(p5, 10) * 3600;
+        p6 = parseInt(p6, 10) * 60;
+        p7 = parseInt(p7, 10);
+        p8 = parseInt(p8, 10)  /100;
+
+        return '[' + ~~(p1 + p2 + p3 + p4) + ']' +
+               '[' + ~~(p5 + p6 + p7 + p8) + ']';
+      });
+      content = content.replace(/\r\n/gi, '|');
+      content = content.replace(/\|\|/gi, '\r\n');
+      return content;
       break;
     case 'SubRip':
       return content;
