@@ -49,4 +49,4 @@ if you don't give output file it will override input file
 
 * convert from tmp to all formats
 * convert from mpl2 to subrip
-* convert from MicroDvd to TMP and SubRip
+* convert from MicroDvd to SubRip
