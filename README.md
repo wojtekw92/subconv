@@ -5,9 +5,9 @@ Small command line tool for converting subtitles.
 
 Subconv is a small command line tool for converting subtitles.
 It can convert subtitles between formats:
-* TMP
-* MPL2
-* SubRip
+* TMP( 00:01:02:Sample text)
+* MPL2([123][456]Sample text)
+* SubRip({123}{456}Sample text)
 * MicroDvd
 
 ## HOW TO INSTALL
@@ -28,7 +28,7 @@ npm i subconv -g
 subconv -i INPUTFILE.txt -c "OUTPUT FORMAT"
 ```
 
-## OPTIONS 
+## OPTIONS
 ```
 Options:
 
@@ -49,5 +49,4 @@ if you don't give output file it will override input file
 
 * convert from tmp to all formats
 * convert from mpl2 to subrip
-* convert from subrip to tmp and microDVD
 * convert from MicroDvd to TMP and SubRip

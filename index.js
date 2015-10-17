@@ -97,9 +97,25 @@ var mpl2To = function(format, content, fps) {
   }
 };
 
+var int2str = function(input) {
+  if(input>9) return input;
+  else return '0'+input;
+}
+
 var subRipTo = function(format, content, fps) {
   switch (format) {
     case 'TMP':
+      content = content.replace(/\d*\W*\n(\d\d):(\d\d):(\d\d),\d*\s*-->\s*\d\d:\d\d:\d\d,\d*\W*\n/gi,
+      function(match, p1, p2, p3, offset, string) {
+        p1 = parseInt(p1, 10);
+        p2 = parseInt(p2, 10);
+        p3 = parseInt(p3, 10);
+
+        return int2str(p1) + ':' + int2str(p2) + ':' + int2str(p3)+':';
+      });
+      content = content.replace(/\r\n/gi, '|');
+      content = content.replace(/\|\|/gi, '\r\n');
+      return content;
       break;
     case 'MicroDVD':
       content = content.replace(/\d*\W*\n(\d\d):(\d\d):(\d\d),(\d*)\s*-->\s*(\d\d):(\d\d):(\d\d),(\d*)\W*\n/gi,
