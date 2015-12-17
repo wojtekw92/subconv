@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Tool for converting subtitles. Supported formats TMP, MPL2, MicroDVD, SubRip.",
   "main": "index.js",
-  "contributors" : [
+  "contributors": [
     "Michał Budzyński <michal@virtualdesign.pl>"
   ],
   "dependencies": {
@@ -24,9 +24,17 @@
     "tmp"
   ],
   "author": "Wojciech Wozniak",
-  "license": "MIT"
-  ,"preferGlobal": "true",
+  "license": "MIT",
+  "preferGlobal": "true",
   "bin": {
-    "subconv" : "index.js"
-  }
+    "subconv": "index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wojtekw92/subconv.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wojtekw92/subconv/issues"
+  },
+  "homepage": "https://github.com/wojtekw92/subconv#readme"
 }

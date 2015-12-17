@@ -24,8 +24,9 @@ npm i subconv -g
 ```
 
 ## USAGE
+convert input file "INPUTFILE.txt" without changing name to SubRip
 ```
-subconv -i INPUTFILE.txt -c "OUTPUT FORMAT"
+subconv -i INPUTFILE.txt -c SubRip
 ```
 
 ## OPTIONS
