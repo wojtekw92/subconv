@@ -34,7 +34,7 @@ Options:
 
 -h, --help                 output usage information
 -V, --version              output the version number
--c, --convert <format>     convert input subtitles to output with selected format
+-c, --convert <format>     convert input subtitles to output with selected format(TMP, MPL2, SubRip, MicroDVD)
 -i, --input <file>         input file
 -o, --output <file>        output file
 -C, --check <file>         Check subtitle format in file
@@ -49,4 +49,4 @@ if you don't give output file it will override input file
 
 * convert from tmp to all formats
 * convert from mpl2 to subrip
-* convert from MicroDvd to SubRip
+* convert from MicroDVD to SubRip
